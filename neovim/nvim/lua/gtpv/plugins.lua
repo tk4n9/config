@@ -1,17 +1,17 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -84,16 +84,16 @@ local plugins = {
 						endpoint = "https://api.openai.com/v1/chat/completions",
 					},
 					copilot = {
-						disable = true,
+						disable = false,
 						endpoint = "https://api.githubcopilot.com/chat/completions",
 						secret = {
 							"zsh",
 							"-c",
-							"cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\",*//'",
+							"cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'",
 						},
 					},
 					ollama = {
-						disable = false,
+						disable = true,
 						endpoint = "http://localhost:11434/v1/chat/completions",
 						secret = "dummy_secret",
 					},
@@ -104,7 +104,55 @@ local plugins = {
 			-- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
 			-- Saved on the after/plugins/_gp.lua file
 		end,
-	}
+	},
+	{
+		"tadmccorkle/markdown.nvim",
+		ft = "markdown", -- or 'event = "VeryLazy"'
+		opts = {
+			-- configuration here or empty for defaults
+		},
+	},
+	{
+		'GTPV/render-whitespace.nvim',
+		config = function()
+			require('render-whitespace').setup({
+				chars = {
+					space = '·',
+					tab = '↦',
+					newline = '↲',
+					trail = '•',
+				},
+				modes = {
+					normal = false,
+					visual = true,
+					insert = false,
+				},
+				enabled = true,
+				highlight_group = 'Whitespace',
+				-- colors = {
+					-- fg = '#666666',        -- Subtle gray for whitespace
+					-- visual_fg = '#ffd700', -- Gold when in visual selection
+				-- },
+			})
+
+			-- Add keymaps using the recommended command style
+			vim.keymap.set('n', '<leader>tw', '<cmd>RenderWhitespaceToggle<cr>', 
+			{ desc = 'Toggle whitespace rendering' })
+
+			vim.keymap.set('n', '<leader>tn', '<cmd>RenderWhitespaceToggleNormal<cr>', 
+			{ desc = 'Toggle whitespace in normal mode' })
+
+			vim.keymap.set('n', '<leader>tv', '<cmd>RenderWhitespaceToggleVisual<cr>', 
+			{ desc = 'Toggle whitespace in visual mode' })
+
+			vim.keymap.set('n', '<leader>ti', '<cmd>RenderWhitespaceToggleInsert<cr>', 
+			{ desc = 'Toggle whitespace in insert mode' })
+
+			-- Color management keymap
+			vim.keymap.set('n', '<leader>wc', '<cmd>RenderWhitespaceSetColors fg=#ff6b6b visual_fg=#4ecdc4<cr>', 
+			{ desc = 'Set custom whitespace colors' })
+		end,
+	},
 }
 
 local opts = {
