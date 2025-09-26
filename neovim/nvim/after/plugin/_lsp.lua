@@ -47,19 +47,27 @@ vim.diagnostic.config({
         float = { border = 'rounded' },
 })
 
-local on_attach = function(_, bufnr)
-        local opts = { buffer = bufnr, remap = false }
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
-        vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
-        vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
-        vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
-        vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts)
-        vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
-        vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-end
+local lsp_attach_group = vim.api.nvim_create_augroup('gtpv-lsp-attach', { clear = true })
+vim.api.nvim_create_autocmd('LspAttach', {
+        group = lsp_attach_group,
+        callback = function(event)
+                local opts = { buffer = event.buf, remap = false }
+                local function map(mode, keys, func, desc)
+                        vim.keymap.set(mode, keys, func, vim.tbl_extend('force', opts, { desc = desc }))
+                end
+
+                map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
+                map('n', 'K', vim.lsp.buf.hover, 'Hover documentation')
+                map('n', '<leader>vws', vim.lsp.buf.workspace_symbol, 'Workspace symbols')
+                map('n', '<leader>vd', vim.diagnostic.open_float, 'Line diagnostics')
+                map('n', '[d', vim.diagnostic.goto_next, 'Next diagnostic')
+                map('n', ']d', vim.diagnostic.goto_prev, 'Previous diagnostic')
+                map('n', '<leader>vca', vim.lsp.buf.code_action, 'Code actions')
+                map('n', '<leader>vrr', vim.lsp.buf.references, 'References')
+                map('n', '<leader>vrn', vim.lsp.buf.rename, 'Rename symbol')
+                map('i', '<C-h>', vim.lsp.buf.signature_help, 'Signature help')
+        end,
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -72,7 +80,6 @@ mason_lspconfig.setup({
                 function(server_name)
                         local opts = {
                                 capabilities = capabilities,
-                                on_attach = on_attach,
                         }
 
                         if server_name == 'lua_ls' then
