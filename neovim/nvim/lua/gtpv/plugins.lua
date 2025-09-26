@@ -44,27 +44,25 @@ local plugins = {
 
 	'github/copilot.vim',
 
-	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
-		dependencies = {
-			-- LSP Support
-			{'neovim/nvim-lspconfig'},
-			{'williamboman/mason.nvim'},
-			{'williamboman/mason-lspconfig.nvim'},
+        {
+                'neovim/nvim-lspconfig',
+                dependencies = {
+                        -- LSP Support
+                        'williamboman/mason.nvim',
+                        'williamboman/mason-lspconfig.nvim',
 
-			-- Autocompletion : I'm going to use copilot
-			{'hrsh7th/nvim-cmp'},
-			{'hrsh7th/cmp-nvim-lsp'},
-			{'saadparwaiz1/cmp_luasnip'},
-			{'hrsh7th/cmp-buffer'},
-			{'hrsh7th/cmp-path'},
+                        -- Autocompletion
+                        'hrsh7th/nvim-cmp',
+                        'hrsh7th/cmp-nvim-lsp',
+                        'saadparwaiz1/cmp_luasnip',
+                        'hrsh7th/cmp-buffer',
+                        'hrsh7th/cmp-path',
 
-			-- Snippets
-			{'L3MON4D3/LuaSnip'},
-			{'rafamadriz/friendly-snippets'},
-		}
-	},
+                        -- Snippets
+                        'L3MON4D3/LuaSnip',
+                        'rafamadriz/friendly-snippets',
+                }
+        },
 	{
 		"vhyrro/luarocks.nvim",
 		priority = 1000,
