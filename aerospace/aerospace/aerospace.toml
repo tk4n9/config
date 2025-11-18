@@ -1,0 +1,98 @@
+# Reference: https://github.com/i3/i3/blob/next/etc/config
+
+start-at-login = true
+
+# i3 doesn't have "normalizations" feature that why we disable them here.
+# But the feature is very helpful.
+# Normalizations eliminate all sorts of weird tree configurations that don't make sense.
+# Give normalizations a chance and enable them back.
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+# Mouse follows focus when focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+[key-mapping.key-notation-to-key-code]
+# mainmod = 'cmd'
+
+[mode.main.binding]
+# See: https://nikitabobko.github.io/AeroSpace/goodness#open-a-new-window-with-applescript
+# cmd-enter = '''exec-and-forget osascript -e '
+# tell application "iTerm"
+# do script
+# activate
+# end tell'
+# '''
+
+alt-enter = 'exec-and-forget open -n -a iTerm'
+cmd-enter = 'exec-and-forget open -n -a ChatGPT\ Atlas'
+
+# i3 wraps focus by default
+alt-cmd-h =	'focus --boundaries-action wrap-around-the-workspace left'
+alt-cmd-j = 'focus --boundaries-action wrap-around-the-workspace down'
+alt-cmd-k = 'focus --boundaries-action wrap-around-the-workspace up'
+alt-cmd-l =	'focus --boundaries-action wrap-around-the-workspace right'
+
+alt-cmd-shift-h = 'move left'
+alt-cmd-shift-j = 'move down'
+alt-cmd-shift-k = 'move up'
+alt-cmd-shift-l = 'move right'
+
+# Consider using 'join-with' command as a 'split' replacement if you want to enable normalizations
+alt-cmd-semicolon = 'split horizontal'
+alt-cmd-v = 'split vertical'
+
+alt-cmd-f = 'fullscreen'
+
+alt-cmd-s = 'layout v_accordion' # 'layout stacking' in i3
+alt-cmd-w = 'layout h_accordion' # 'layout tabbed' in i3
+alt-cmd-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+alt-cmd-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+# Not supported, because this command is redundant in AeroSpace mental model.
+# See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+#alt-space = 'focus toggle_tiling_floating'
+
+# `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+# should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+# alt-a = 'focus parent'
+
+alt-cmd-7 = 'workspace 7'
+alt-cmd-8 = 'workspace 8'
+alt-cmd-9 = 'workspace 9'
+alt-cmd-0 = 'workspace 10'
+alt-cmd-b = 'workspace B' # workspace for browser
+alt-cmd-n = 'workspace now'
+alt-cmd-m = 'workspace msg' # workspace for messanger - slack, kakaotalk, etc.
+alt-cmd-comma = 'workspace <'
+alt-cmd-period = 'workspace $>' # workspace for terminal
+
+alt-cmd-shift-7 = 'move-node-to-workspace 7'
+alt-cmd-shift-8 = 'move-node-to-workspace 8'
+alt-cmd-shift-9 = 'move-node-to-workspace 9'
+alt-cmd-shift-0 = 'move-node-to-workspace 10'
+alt-cmd-shift-n = 'move-node-to-workspace now'
+alt-cmd-shift-m = 'move-node-to-workspace msg' # workspace for messanger - slack, kakaotalk, etc.
+alt-cmd-shift-b = 'move-node-to-workspace B' # workspace for browser
+alt-cmd-shift-period = 'move-node-to-workspace $>' # workspace for terminal
+alt-cmd-shift-comma = 'move-node-to-workspace <'
+
+alt-cmd-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+alt-cmd-shift-c = 'reload-config'
+
+alt-cmd-r = 'mode resize'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'
+alt-r = 'mode main'
+
+[workspace-to-monitor-force-assignment]
+8 = 'secondary'
+9 = 'secondary'
