@@ -20,6 +20,11 @@ require('rose-pine').setup({
 	dark_variant = 'moon',
 })
 
+require('bw').setup({
+	bold = false,
+	italic = false,
+})
+
 function ChangeColor(color, bg)
 	color = color or "base16-google-light"
 	bg = bg or "light"
@@ -27,5 +32,5 @@ function ChangeColor(color, bg)
 	vim.cmd.set("background=" .. bg)
 end
 
-ChangeColor("github_light")
+ChangeColor("bw-binary")
 -- print("Colors loaded")

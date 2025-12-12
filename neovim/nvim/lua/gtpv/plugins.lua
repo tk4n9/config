@@ -35,6 +35,7 @@ local plugins = {
 	'RRethy/nvim-base16',
 
 	'daschw/leaf.nvim',
+	'tk4n9/bw.nvim',
 	'nyoom-engineering/oxocarbon.nvim',
 	'savq/melange-nvim',
 	'rose-pine/neovim',
