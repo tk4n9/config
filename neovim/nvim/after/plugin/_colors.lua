@@ -21,7 +21,7 @@ require('rose-pine').setup({
 })
 
 require('bw').setup({
-	bold = false,
+	bold = true,
 	italic = false,
 })
 

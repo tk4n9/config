@@ -1,6 +1,6 @@
 # Reference: https://github.com/i3/i3/blob/next/etc/config
 
-start-at-login = true
+start-at-login = false
 
 # i3 doesn't have "normalizations" feature that why we disable them here.
 # But the feature is very helpful.
@@ -25,7 +25,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # '''
 
 alt-enter = 'exec-and-forget open -n -a iTerm'
-cmd-enter = 'exec-and-forget open -n -a ChatGPT\ Atlas'
+cmd-enter = 'exec-and-forget open -n -a Google\ Chrome'
+alt-cmd-enter = 'exec-and-forget open -n -a Finder'
 
 # i3 wraps focus by default
 alt-cmd-h =	'focus --boundaries-action wrap-around-the-workspace left'
@@ -91,7 +92,7 @@ k = 'resize height -50'
 l = 'resize width +50'
 enter = 'mode main'
 esc = 'mode main'
-alt-r = 'mode main'
+alt-cmd-r = 'mode main'
 
 [workspace-to-monitor-force-assignment]
 8 = 'secondary'
