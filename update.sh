@@ -74,7 +74,7 @@ update_hyprland() {
 update_foot() {
 	if confirm "You are about to update foot config"; then
 		echo "updating foot config"
-		cp ~/.config/foot ./foot
+		cp -R ~/.config/foot ./foot
 	fi
 }
 
