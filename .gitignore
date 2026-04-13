@@ -1,1 +1,17 @@
+# MacOS
 .DS_Store
+
+# Agents
+.omc/
+.omx/
+.claude/
+.codex/
+
+# Secrets / tokens
+*.pem
+*.key
+*.env
+.env*
+*secret*
+*credentials*
+*token*
